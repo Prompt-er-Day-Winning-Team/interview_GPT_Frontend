@@ -34,16 +34,26 @@ function HomePage() {
             <S.CardText>{"새로운 인터뷰를 추가하세요!"}</S.CardText>
           </S.InterviewCard>
           <S.InterviewCard>
-            <S.Title style={{ marginTop: "150px" }}>
+            <S.Title style={{ marginTop: "130px" }}>
               {"SKT 에이닷 통화 요약 기능 방해요소"}
             </S.Title>
             <S.CardText>{"남은 질문 작성하기 3/5"}</S.CardText>
+            <S.ProgressBlock>
+              <S.ProgressBar>
+                <S.Progress style={{ width: "105px" }} />
+              </S.ProgressBar>
+            </S.ProgressBlock>
           </S.InterviewCard>
           <S.InterviewCard>
-            <S.Title style={{ marginTop: "150px" }}>
+            <S.Title style={{ marginTop: "130px" }}>
               {"SKT 에이닷 통화 요약 기능 방해요소"}
             </S.Title>
             <S.CardText>{"인터뷰 진행하기 4/5"}</S.CardText>
+            <S.ProgressBlock>
+              <S.ProgressBar>
+                <S.Progress />
+              </S.ProgressBar>
+            </S.ProgressBlock>
           </S.InterviewCard>
         </S.InterviewCardBlock>
       </S.InterviewQuestionBlock>

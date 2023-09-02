@@ -99,3 +99,30 @@ export const DoneButton = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const ProgressBlock = styled.div`
+  width: 268px;
+  height: 37px;
+  background: #0548fb;
+  border-bottom-left-radius: 20px; /* 왼쪽 아래 모서리 둥글게 깎음 */
+  border-bottom-right-radius: 20px;
+  margin: -24px;
+  margin-top: 20px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ProgressBar = styled.div`
+  width: 200px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+`;
+
+export const Progress = styled.div`
+  width: 135px;
+  height: 6px;
+  background-color: white;
+  border-radius: 5px;
+`;
