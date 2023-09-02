@@ -12,7 +12,7 @@ export const Wrap = styled.div`
     color: #333335;
     border: 1px solid #b7bcc6;
     border-radius: 8px;
-    padding: 21px 16px;
+    padding: 16px;
     outline: none;
     box-sizing: border-box;
   }
