@@ -4,6 +4,7 @@ import * as S from "./style";
 import { ReactComponent as IdeaIcon } from "../../../asset/icons/status-idea.svg"
 import { TextInput, QuestionInput } from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
+import { useNavigate } from "react-router-dom";
 
 const personaInfo = {
   "기본정보" : {
@@ -35,6 +36,8 @@ const personaInfo = {
 }
 
 function Persona() {
+  const navigate = useNavigate();
+
   return (
     <S.Wrap>
       <Header />
@@ -77,8 +80,8 @@ function Persona() {
           </>
         ))}
         <S.ButtonContainer>
-          <Button text={"이전으로"} width={"192px"} height={"44px"} backgroundColor={"#FFFFFF"} color={"#333335"} />
-          <Button text={"다음으로"} width={"192px"} height={"44px"} backgroundColor={"#333335"} color={"#F1F4F9"} />
+          <Button text={"이전으로"} width={"192px"} height={"44px"} backgroundColor={"#FFFFFF"} color={"#333335"} onClick={() => navigate("/prepare/basic-info")}  />
+          <Button text={"다음으로"} width={"192px"} height={"44px"} backgroundColor={"#333335"} color={"#F1F4F9"} onClick={() => navigate("/prepare/question-list")}  />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>
     </S.Wrap>

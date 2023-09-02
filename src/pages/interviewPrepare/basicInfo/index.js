@@ -7,6 +7,7 @@ import { ReactComponent as PrototypeIcon } from "../../../asset/icons/status-pro
 import { ReactComponent as ReleaseIcon } from "../../../asset/icons/status-release.svg"
 import { TextInput } from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
+import { useNavigate } from "react-router-dom";
 
 const statusList = [
   [<IdeaIcon/>, "아이디어", "초기 단계로 진출하고자 하는 시장과 해당 시장의 소비자를 이해하는 단계입니다."],
@@ -16,6 +17,7 @@ const statusList = [
 ]
 
 function BasicInfo() {
+  const navigate = useNavigate();
   const [selectedStatus, setSelectedStatus] = useState(-1);
   const [productForm, setProductForm] = useState({
     productName: "",
@@ -93,7 +95,7 @@ function BasicInfo() {
         />
         <S.TextCount>{`${productForm.targetUser.length}/100`}</S.TextCount>
         <S.ButtonContainer>
-          <Button text={"다음으로"} width={"192px"} height={"44px"} backgroundColor={"#333335"} color={"#F1F4F9"} />
+          <Button text={"다음으로"} width={"192px"} height={"44px"} backgroundColor={"#333335"} color={"#F1F4F9"} onClick={() => navigate("/prepare/persona")} />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>
     </S.Wrap>

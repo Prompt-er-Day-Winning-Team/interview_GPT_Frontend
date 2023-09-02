@@ -10,7 +10,7 @@ export const Wrap = styled.div`
     font-size: 14px;
     font-family: "Pretendard-Medium";
     color: #333335;
-    border: 1px solid #b7bcc6;
+    border: none;
     border-radius: 8px;
     padding: 16px;
     outline: none;
@@ -31,7 +31,27 @@ export const WrapQuestion = styled.div`
     font-size: 14px;
     font-family: "Pretendard-Medium";
     color: #333335;
-    border: 1px solid #b7bcc6;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  ::placeholder {
+    color: #b7bcc6;
+  }
+`;
+
+export const WrapVirtualInterview = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  > textarea {
+    font-size: 14px;
+    font-family: "Pretendard-Medium";
+    color: #333335;
+    border: none;
     border-radius: 8px;
     outline: none;
     box-sizing: border-box;
