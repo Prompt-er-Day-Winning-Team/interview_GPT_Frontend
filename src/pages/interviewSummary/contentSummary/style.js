@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Modal from "antd/es/modal/Modal";
 
 export const Wrap = styled.div`
   width: 100%;
@@ -94,9 +95,9 @@ export const LinkCopyButton = styled.div`
   height: 19px;
   border-radius: 40px;
   padding: 10px;
-  border: 1px solid #0548fb;
+  border: 1px solid #27ae62;
   font-size: 14px;
-  color: #0548fb;
+  color: #27ae62;
   font-family: "Pretendard-medium";
   cursor: pointer;
   display: flex;
@@ -109,4 +110,38 @@ export const ButtonBlock = styled.div`
   gap: 16px;
   justify-content: end;
   margin: 400px 0 10px 0;
+`;
+
+export const CustomModal = styled(Modal)`
+  display: flex;
+  justify-content: center;
+  .ant-modal-header {
+  }
+  .ant-modal-title {
+    color: #333335;
+    font-size: 18px;
+    font-family: "Pretendard-Bold";
+  }
+`;
+
+export const SummaryCard = styled.div`
+  width: 430px;
+  height: fit-content;
+  background: #f1f4f9;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  justify-content: center;
+`;
+
+export const Content = styled.div`
+  color: #8e94a1;
+  font-size: 15px;
+  font-family: "Pretendard-Medium";
+  white-space: pre-line;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
