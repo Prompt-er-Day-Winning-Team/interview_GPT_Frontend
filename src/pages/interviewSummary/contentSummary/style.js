@@ -9,7 +9,8 @@ export const Wrap = styled.div`
 export const InterviewHeader = styled.div`
   display: flex;
   margin: 45px 24px;
-  margin-bottom: 10px !important;
+  margin-bottom: 5px !important;
+  justify-content: space-between;
 `;
 
 export const Title = styled.div`

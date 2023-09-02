@@ -110,7 +110,7 @@ function ContentSummary() {
       <Header />
       <S.InterviewHeader>
         <S.Title>{"Interviewer"}</S.Title>
-        <S.CheckButton>{"개요 확인하기"}</S.CheckButton>
+        {/*<S.CheckButton>{"개요 확인하기"}</S.CheckButton>*/}
         <S.AddButton>{"+ 새 인터뷰어 추가"}</S.AddButton>
       </S.InterviewHeader>
       <S.InterviewerCardBlock>
