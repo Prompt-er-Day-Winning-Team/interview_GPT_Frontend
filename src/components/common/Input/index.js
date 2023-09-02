@@ -10,14 +10,38 @@ function TextInput(props) {
         placeholder={props.title}
         onChange={props.onChange}
         value={props.value}
-        style={{ 
+        style={{
+          resize: "none",
           width: props.width, 
           height: props.height, 
           backgroundColor: props.backgroundColor
         }}
+        disabled={props.disabled}
       />
     </S.Wrap>
   );
 }
 
-export default TextInput;
+function QuestionInput(props) {
+  return (
+    <S.WrapQuestion>
+      <span style={{ position: 'absolute', marginLeft: '16px'}}>{props.frontText}</span>
+      <textarea
+        name={props.name}
+        type={props.type || "text"}
+        placeholder={props.title}
+        onChange={props.onChange}
+        value={props.value}
+        style={{
+          resize: "none",
+          width: props.width, 
+          height: props.height, 
+          backgroundColor: props.backgroundColor
+        }}
+        disabled={props.disabled}
+      />
+    </S.WrapQuestion>
+  );
+}
+
+export {TextInput, QuestionInput};

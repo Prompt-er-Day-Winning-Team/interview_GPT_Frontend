@@ -5,7 +5,7 @@ import { ReactComponent as IdeaIcon } from "../../../asset/icons/status-idea.svg
 import { ReactComponent as ConceptIcon } from "../../../asset/icons/status-concept.svg"
 import { ReactComponent as PrototypeIcon } from "../../../asset/icons/status-prototype.svg"
 import { ReactComponent as ReleaseIcon } from "../../../asset/icons/status-release.svg"
-import TextInput from "../../../components/common/Input";
+import { TextInput } from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 
 const statusList = [

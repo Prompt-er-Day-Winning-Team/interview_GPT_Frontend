@@ -59,17 +59,15 @@ export const CardContents = styled.div`
   letter-spacing: -0.42px;
 `;
 
-export const TextCount = styled.div`
-  color: #333335;
-  font-size: 14px;
-  font-family: "Pretendard";
-  margin-top: 6px;
-  line-height: 22px;
-  text-align: right;
+export const QuestionSetContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  margin: 8px 0;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
+  gap: 16px;
   justify-content: end;
   margin: 90px 0 10px 0;
 `;
