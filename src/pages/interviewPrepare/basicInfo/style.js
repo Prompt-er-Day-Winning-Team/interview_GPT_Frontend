@@ -32,7 +32,14 @@ export const Card = styled.div`
   width: 296px;
   border-radius: 24px;
   border: 1px solid var(--gray3, #B7BCC6);
+  border: ${props => props.selected ? "2px solid var(--gray1, #333335)" : "1px solid var(--gray3, #B7BCC6)"};
+  margin-bottom: ${props => props.selected ? "0" : "2px"};
   padding: 24px;
+  cursor: pointer;
+  &:hover {
+    border: 2px solid var(--gray1, #333335);
+    margin-bottom: 0;
+  }
 `;
 
 export const CardTitle = styled.div`
