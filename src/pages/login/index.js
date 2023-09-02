@@ -41,7 +41,9 @@ function LoginPage() {
             onChange={handleInputChange}
             value={loginForm.password}
           />
-          <S.LoginButton>{"로그인"}</S.LoginButton>
+          <S.LoginButton onClick={() => navigate("/homepage")}>
+            {"로그인"}
+          </S.LoginButton>
           <S.AccountActionsBlock>
             <span>{"이메일 찾기"}</span>
             <span> | </span>

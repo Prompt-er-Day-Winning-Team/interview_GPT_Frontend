@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/common/Header";
 import * as S from "./style";
+import { useNavigate } from "react-router";
 
 const CardList = [
   {
@@ -22,6 +23,7 @@ const CardList = [
 ];
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <S.Wrap>
       <Header />
@@ -29,7 +31,9 @@ function HomePage() {
         <S.Title>{"Interview"}</S.Title>
         <S.InterviewCardBlock>
           <S.InterviewCard>
-            <S.PlusButton>{"+"}</S.PlusButton>
+            <S.PlusButton onClick={() => navigate("/prepare/basic-info")}>
+              {"+"}
+            </S.PlusButton>
             <S.Title>{"New Interview"}</S.Title>
             <S.CardText>{"새로운 인터뷰를 추가하세요!"}</S.CardText>
           </S.InterviewCard>
