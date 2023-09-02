@@ -62,5 +62,6 @@ export const AccountActionsBlock = styled.div`
     color: #333335;
     font-size: 16px;
     font-family: "Pretendard-Medium";
+    cursor: pointer;
   }
 `;

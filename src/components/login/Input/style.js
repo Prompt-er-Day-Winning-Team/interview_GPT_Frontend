@@ -15,6 +15,7 @@ export const Wrap = styled.div`
     border: 1px solid #b7bcc6;
     border-radius: 10px;
     padding: 12px 15px;
+    outline: none;
   }
   ::placeholder {
     color: #b7bcc6;

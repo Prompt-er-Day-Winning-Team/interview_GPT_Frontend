@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../../components/common/Header";
 import Input from "../../components/login/Input";
+import { useNavigate } from "react-router";
 import * as S from "./style";
 
 function LoginPage() {
@@ -8,6 +9,7 @@ function LoginPage() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   // loginForm onChangeHandler
   const handleInputChange = (e) => {
@@ -45,7 +47,7 @@ function LoginPage() {
             <span> | </span>
             <span>{"비밀번호 찾기"}</span>
             <span> | </span>
-            <span>{"회원가입"}</span>
+            <span onClick={() => navigate("/joinpage")}>{"회원가입"}</span>
           </S.AccountActionsBlock>
         </S.InputBlock>
       </S.LoginBlock>

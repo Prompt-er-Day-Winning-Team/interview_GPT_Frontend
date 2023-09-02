@@ -11,3 +11,10 @@
   font-weight: 400;
   src: url("asset/fonts/Pretendard-Medium.otf");
 }
+
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("asset/fonts/Pretendard-SemiBold.otf");
+}
