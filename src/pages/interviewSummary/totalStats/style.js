@@ -55,3 +55,12 @@ export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const WordCloudBlock = styled.div`
+  display: flex;
+  width: 100%;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+`;

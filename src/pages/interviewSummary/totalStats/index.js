@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../../components/common/Header";
 import * as S from "./style";
+import WordCloud from "../../../components/wordCloud";
 
 const InterviewSumList = [
   {
@@ -43,6 +44,44 @@ const InsightList = [
   },
 ];
 
+const words = [
+  { text: "정확도 예측 기능", value: 40 },
+  { text: "서비스의", value: 40 },
+  { text: "인식의", value: 40 },
+  { text: "기능을", value: 40 },
+  { text: "통화요약", value: 40 },
+  { text: "중요한", value: 30 },
+  { text: "이벤트", value: 30 },
+  { text: "클라이언트와의", value: 32 },
+  { text: "녹음", value: 30 },
+  { text: "정확도", value: 20 },
+  { text: "특별한", value: 20 },
+  { text: "높낮이나", value: 20 },
+  { text: "높낮이나", value: 20 },
+  { text: "데이터", value: 20 },
+  { text: "자동 생성 기능", value: 15 },
+  { text: "기능작인", value: 15 },
+  { text: "자동 응답 기능", value: 15 },
+  { text: "업무", value: 15 },
+  { text: "인터뷰", value: 15 },
+  { text: "어려움을", value: 15 },
+  { text: "알림을", value: 12 },
+  { text: "전략이", value: 12 },
+  { text: "제안", value: 10 },
+  { text: "편리성", value: 10 },
+  { text: "텍스트", value: 10 },
+  { text: "피드백 기능", value: 10 },
+  { text: "통화 요약 기능", value: 10 },
+  { text: "음성 녹음 기능", value: 10 },
+  { text: "GPT", value: 10 },
+  { text: "에이닷의", value: 7 },
+  { text: "예측성", value: 7 },
+  { text: "복습하고", value: 7 },
+  { text: "대상으로", value: 10 },
+  { text: "실패나", value: 11 },
+  { text: "인식의", value: 11 },
+];
+
 function TotalStats() {
   return (
     <S.Wrap>
@@ -60,7 +99,6 @@ function TotalStats() {
             </S.InterviewCard>
           ))}
         </S.InterviewCardBlock>
-
         <S.Title>{"인사이트 도출"}</S.Title>
         <S.InterviewCardBlock>
           {InsightList.map((insight) => (
@@ -73,6 +111,10 @@ function TotalStats() {
             </S.InterviewCard>
           ))}
         </S.InterviewCardBlock>
+        <S.Title>{"워드 클라우드"}</S.Title>
+        <S.WordCloudBlock>
+          <WordCloud words={words} />
+        </S.WordCloudBlock>
       </S.InterviewBlock>
     </S.Wrap>
   );
