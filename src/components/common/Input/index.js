@@ -25,7 +25,7 @@ function TextInput(props) {
 function QuestionInput(props) {
   return (
     <S.WrapQuestion>
-      <span style={{ position: 'absolute', marginLeft: '16px'}}>{props.frontText}</span>
+      <span style={{ color: '#8E94A1', position: 'absolute', marginLeft: '16px'}}>{props.frontText}</span>
       <textarea
         name={props.name}
         type={props.type || "text"}
@@ -36,7 +36,8 @@ function QuestionInput(props) {
           resize: "none",
           width: props.width, 
           height: props.height, 
-          backgroundColor: props.backgroundColor
+          backgroundColor: props.backgroundColor,
+          padding: `16px 16px 16px ${props.frontText.length < 3 ? 55 : 55 + 13*(props.frontText.length-2)}px`,
         }}
         disabled={props.disabled}
       />

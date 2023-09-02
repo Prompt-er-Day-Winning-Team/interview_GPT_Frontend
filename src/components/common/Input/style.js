@@ -33,7 +33,6 @@ export const WrapQuestion = styled.div`
     color: #333335;
     border: 1px solid #b7bcc6;
     border-radius: 8px;
-    padding: 16px 16px 16px 44px;
     outline: none;
     box-sizing: border-box;
   }
