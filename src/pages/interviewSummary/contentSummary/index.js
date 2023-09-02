@@ -3,6 +3,7 @@ import Header from "../../../components/common/Header";
 import * as S from "./style";
 import Button from "../../../components/common/Button";
 import { message } from "antd";
+import { useNavigate } from "react-router";
 
 const ContentList = [
   {
@@ -96,7 +97,7 @@ function Modal(props) {
 function ContentSummary() {
   const [isOpen, setIsOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-
+  const navigate = useNavigate();
   const success = () => {
     messageApi.open({
       type: "success",
@@ -136,6 +137,7 @@ function ContentSummary() {
           height={"45px"}
           backgroundColor={"#FFFFFF"}
           color={"#333335"}
+          onClick={() => navigate("/homepage")}
         />
         <Button
           text={"전체 통계내기"}
@@ -143,6 +145,7 @@ function ContentSummary() {
           height={"45px"}
           backgroundColor={"#333335"}
           color={"#F1F4F9"}
+          onClick={() => navigate("/summary/total-stats")}
         />
       </S.ButtonBlock>
       {isOpen ? (

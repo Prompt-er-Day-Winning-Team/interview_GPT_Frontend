@@ -7,6 +7,7 @@ import BasicInfo from "./pages/interviewPrepare/basicInfo";
 import QuestionList from "./pages/interviewPrepare/questionList";
 import InterviewHelper from "./pages/interviewHelper";
 import ContentSummary from "./pages/interviewSummary/contentSummary";
+import TotalStats from "./pages/interviewSummary/totalStats";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/helper" element={<InterviewHelper />} />
         {/* 인터뷰 내용 정리 및 인사이트 도출 */}
         <Route path="/summary/content-summary" element={<ContentSummary />} />
+        <Route path="/summary/total-stats" element={<TotalStats />} />
       </Routes>
     </BrowserRouter>
   );
