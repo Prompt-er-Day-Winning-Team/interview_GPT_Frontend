@@ -6,13 +6,16 @@ function Button(props) {
     <S.Wrap>
       <button
         onClick={props.onClick}
-        style={{ 
-          width: props.width, 
-          height: props.height, 
+        style={{
+          width: props.width,
+          height: props.height,
           backgroundColor: props.backgroundColor,
-          color: props.color
+          color: props.color,
+          border: "1px solid #333335",
         }}
-      >{props.text}</button>
+      >
+        {props.text}
+      </button>
     </S.Wrap>
   );
 }

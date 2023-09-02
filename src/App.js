@@ -6,7 +6,7 @@ import HomePage from "./pages/home";
 import BasicInfo from "./pages/interviewPrepare/basicInfo";
 import QuestionList from "./pages/interviewPrepare/questionList";
 import InterviewHelper from "./pages/interviewHelper";
-import InterviewSummary from "./pages/interviewSummary";
+import ContentSummary from "./pages/interviewSummary/contentSummary";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         {/* 실시간 인터뷰 도우미 */}
         <Route path="/helper" element={<InterviewHelper />} />
         {/* 인터뷰 내용 정리 및 인사이트 도출 */}
-        <Route path="/summary" element={<InterviewSummary />} />
+        <Route path="/summary/content-summary" element={<ContentSummary />} />
       </Routes>
     </BrowserRouter>
   );
