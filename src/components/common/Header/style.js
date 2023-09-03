@@ -6,6 +6,7 @@ export const Wrap = styled.div`
   z-index: 99;
   background-color: #ffffff;
   justify-content: center;
+  margin: 10px;
 `;
 
 export const Logo = styled.img`

@@ -18,3 +18,8 @@
   font-weight: 400;
   src: url("asset/fonts/Pretendard-SemiBold.otf");
 }
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
