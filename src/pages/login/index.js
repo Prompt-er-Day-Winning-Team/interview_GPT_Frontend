@@ -11,7 +11,6 @@ function LoginPage() {
   });
   const navigate = useNavigate();
 
-  // loginForm onChangeHandler
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginForm({
@@ -41,7 +40,10 @@ function LoginPage() {
             onChange={handleInputChange}
             value={loginForm.password}
           />
-          <S.LoginButton onClick={() => navigate("/homepage")}>
+          <S.LoginButton
+            onClick={() => navigate("/homepage")}
+            isCheck={loginForm.email !== "" && loginForm.password !== ""}
+          >
             {"로그인"}
           </S.LoginButton>
           <S.AccountActionsBlock>
