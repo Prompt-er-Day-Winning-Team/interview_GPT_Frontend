@@ -49,7 +49,7 @@ function LoginPage() {
             <span> | </span>
             <span>{"비밀번호 찾기"}</span>
             <span> | </span>
-            <span onClick={() => navigate("/joinpage")}>{"회원가입"}</span>
+            <span onClick={() => navigate("/join")}>{"회원가입"}</span>
           </S.AccountActionsBlock>
         </S.InputBlock>
       </S.LoginBlock>

@@ -16,8 +16,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/loginpage" element={<LoginPage />} />
-        <Route path="/joinpage" element={<JoinPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/join" element={<JoinPage />} />
         {/* 홈화면 및 대시보드 */}
         <Route path="/homepage" element={<HomePage />} />
         {/* 인터뷰 질문 자동 생성 */}

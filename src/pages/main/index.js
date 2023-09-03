@@ -1,7 +1,9 @@
 import React from "react";
 import * as S from "./style";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
   return (
     <S.Wrap>
       {/*
@@ -42,12 +44,12 @@ function Main() {
         </S.InfoCardBlock>
       </S.ContentBlock>
         */}
-      <S.Image src={process.env.PUBLIC_URL + "/images/Main/1.svg"} />
+      <S.Image src={process.env.PUBLIC_URL + "/images/Main/1.svg"} onClick={() => navigate("/login")} />
       <S.Image src={process.env.PUBLIC_URL + "/images/Main/2.svg"} />
       <S.Image src={process.env.PUBLIC_URL + "/images/Main/3.svg"} />
-      <S.Image src={process.env.PUBLIC_URL + "/images/Main/4.svg"} />
+      <S.Image src={process.env.PUBLIC_URL + "/images/Main/4.svg"} onClick={() => navigate("/login")}/>
       <S.Image src={process.env.PUBLIC_URL + "/images/Main/5.svg"} />
-      <S.Image src={process.env.PUBLIC_URL + "/images/Main/6.svg"} />
+      <S.Image src={process.env.PUBLIC_URL + "/images/Main/6.svg"} onClick={() => navigate("/login")}/>
       <S.Image src={process.env.PUBLIC_URL + "/images/Main/7.svg"} />
     </S.Wrap>
   );
