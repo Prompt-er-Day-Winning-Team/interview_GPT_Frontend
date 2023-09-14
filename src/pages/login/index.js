@@ -3,6 +3,8 @@ import Header from "../../components/common/Header";
 import Input from "../../components/login/Input";
 import { useNavigate } from "react-router";
 import * as S from "./style";
+import axios from "axios";
+import { convertLoginUrl } from "../../utils/apis";
 
 function LoginPage() {
   const [loginForm, setLoginForm] = useState({
@@ -17,6 +19,33 @@ function LoginPage() {
       ...loginForm,
       [name]: value,
     });
+  };
+
+  const handleLogin = () => {
+    const response = axios
+      .post(
+        convertLoginUrl(),
+        {
+          id: loginForm.email,
+          password: loginForm.password,
+        },
+        {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        navigate("/homepage");
+      })
+      .catch(function (error) {
+        alert("존재하지 않는 아이디 혹은 비밀번호입니다");
+        setLoginForm({
+          email: "",
+          password: "",
+        });
+      });
   };
 
   return (
@@ -41,7 +70,7 @@ function LoginPage() {
             value={loginForm.password}
           />
           <S.LoginButton
-            onClick={() => navigate("/homepage")}
+            onClick={handleLogin}
             isCheck={loginForm.email !== "" && loginForm.password !== ""}
           >
             {"로그인"}
