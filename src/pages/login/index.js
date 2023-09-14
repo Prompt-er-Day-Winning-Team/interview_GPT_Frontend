@@ -37,6 +37,7 @@ function LoginPage() {
         }
       )
       .then(function (response) {
+        localStorage.setItem("user_id", response.data?.userId);
         navigate("/homepage");
       })
       .catch(function (error) {

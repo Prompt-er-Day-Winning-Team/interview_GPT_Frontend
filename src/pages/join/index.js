@@ -36,7 +36,7 @@ function JoinPage() {
         }
       )
       .then(function (response) {
-        navigate("/homepage");
+        navigate("/login");
       })
       .catch(function (error) {
         console.log(error);
