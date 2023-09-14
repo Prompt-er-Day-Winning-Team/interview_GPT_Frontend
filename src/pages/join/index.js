@@ -3,6 +3,7 @@ import Header from "../../components/common/Header";
 import * as S from "./style";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { convertRegistUserUrl } from "../../utils/apis";
 
 function JoinPage() {
   const [accountInfo, setAccountInfo] = useState({
@@ -19,11 +20,10 @@ function JoinPage() {
     });
   };
 
-  /*const registerUser = () => {
-    // create user
+  const registerUser = () => {
     const response = axios
       .post(
-        "/v1/users",
+        convertRegistUserUrl(),
         {
           id: accountInfo.email,
           password: accountInfo.password,
@@ -36,14 +36,12 @@ function JoinPage() {
         }
       )
       .then(function (response) {
-        console.log(response);
         navigate("/homepage");
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-  */
 
   function isValidEmail(input) {
     if (!/^.{2,10}$/.test(input)) {
@@ -112,7 +110,12 @@ function JoinPage() {
             onChange={handleInputChange}
           />
           <S.JoinButton
-            isCheck={accountInfo.password === accountInfo.passwordCheck}
+            onClick={registerUser}
+            isCheck={
+              accountInfo.email &&
+              accountInfo.password &&
+              accountInfo.password === accountInfo.passwordCheck
+            }
           >
             {"회원가입"}
           </S.JoinButton>
