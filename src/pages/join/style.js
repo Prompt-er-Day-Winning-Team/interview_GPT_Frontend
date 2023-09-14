@@ -94,7 +94,7 @@ export const Visibility = styled.img`
 export const JoinButton = styled.div`
   width: 405px;
   height: 28px;
-  background: #b7bcc6;
+  background: ${(props) => (props.isCheck ? "#333335" : "#b7bcc6")};
   border-radius: 10px;
   padding: 10px;
   color: #f1f4f9;

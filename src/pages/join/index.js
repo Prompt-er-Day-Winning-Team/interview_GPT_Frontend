@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import Header from "../../components/common/Header";
 import * as S from "./style";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 function JoinPage() {
   const [accountInfo, setAccountInfo] = useState({
     email: "",
     password: "",
+    passwordCheck: "",
   });
-
+  const navigate = useNavigate();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAccountInfo({
@@ -15,6 +18,32 @@ function JoinPage() {
       [name]: value,
     });
   };
+
+  /*const registerUser = () => {
+    // create user
+    const response = axios
+      .post(
+        "/v1/users",
+        {
+          id: accountInfo.email,
+          password: accountInfo.password,
+        },
+        {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response);
+        navigate("/homepage");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  */
 
   function isValidEmail(input) {
     if (!/^.{2,10}$/.test(input)) {
@@ -76,8 +105,17 @@ function JoinPage() {
           </S.BoxDescription>
           {/*비밀번호 확인*/}
           <S.ActionLabel>{"비밀번호 확인"}</S.ActionLabel>
-          <S.InputForm type={"password"} />
-          <S.JoinButton>{"회원가입"}</S.JoinButton>
+          <S.InputForm
+            type={"password"}
+            name={"passwordCheck"}
+            value={accountInfo.passwordCheck}
+            onChange={handleInputChange}
+          />
+          <S.JoinButton
+            isCheck={accountInfo.password === accountInfo.passwordCheck}
+          >
+            {"회원가입"}
+          </S.JoinButton>
         </S.InputBlock>
       </S.JoinBlock>
     </S.Wrap>
