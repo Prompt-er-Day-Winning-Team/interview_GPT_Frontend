@@ -55,7 +55,7 @@ const RecordList = [
 
 function Modal(props) {
   const { open, close } = props;
-
+  /*{modal 내용 api response 로 수정해야함}*/
   return (
     <S.CustomModal
       visible={open}
@@ -103,7 +103,16 @@ function ContentSummary() {
   const [interviewResult, setInterviewResult] = useState([]);
 
   const navigate = useNavigate();
-  const success = () => {
+  const handleCopyButton = (link) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = link;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+
     messageApi.open({
       type: "success",
       content: "링크 복사 완료",
@@ -153,7 +162,9 @@ function ContentSummary() {
               <S.InterviewerCard>
                 <span>{interview.name}</span>
                 {contextHolder}
-                <S.LinkCopyButton onClick={success}>
+                <S.LinkCopyButton
+                  onClick={() => handleCopyButton(interview.interview_url)}
+                >
                   {"참여자 전용 링크 복사"}
                 </S.LinkCopyButton>
               </S.InterviewerCard>
