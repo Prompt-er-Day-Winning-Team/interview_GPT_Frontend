@@ -4,7 +4,7 @@ import * as S from "./style";
 import { ReactComponent as IdeaIcon } from "../../../asset/icons/status-idea.svg";
 import { TextInput, QuestionInput } from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { convertCreatePersonaUrl } from "../../../utils/apis";
 
@@ -40,6 +40,10 @@ const personaInfo = {
 
 function Persona() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const productName = params.get("productName");
+  const goal = params.get("goal");
 
   const handleNextButton = () => {
     var userId = localStorage.getItem("user_id");
@@ -57,7 +61,9 @@ function Persona() {
         }
       )
       .then(function (response) {
-        navigate("/prepare/question-list");
+        navigate(
+          `/prepare/question-list?productName=${productName}&goal=${goal}`
+        );
       })
       .catch(function (error) {});
   };
@@ -118,8 +124,8 @@ function Persona() {
             height={"44px"}
             backgroundColor={"#333335"}
             color={"#F1F4F9"}
-            /*{onClick={handleNextButton}}*/
-            onClick={() => navigate("/prepare/question-list")}
+            onClick={handleNextButton}
+            /*onClick={() => navigate("/prepare/question-list")}*/
           />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>

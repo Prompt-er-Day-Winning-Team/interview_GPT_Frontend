@@ -4,7 +4,7 @@ import * as S from "./style";
 import { ReactComponent as IdeaIcon } from "../../../asset/icons/status-idea.svg";
 import { TextInput, QuestionInput } from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { convertCreateQuestionListUrl } from "../../../utils/apis";
 
@@ -38,7 +38,11 @@ const questionSetList = {
 
 function QuestionList() {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const productName = params.get("productName");
+  const goal = params.get("goal");
+  console.log(productName, goal);
   const handleNextButton = () => {
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
@@ -78,7 +82,8 @@ function QuestionList() {
               width={"100%"}
               height={"52px"}
               backgroundColor={"#F1F4F9"}
-              value={"I.GPT 인터뷰 질문 생성 기능"}
+              /*value={"I.GPT 인터뷰 질문 생성 기능"}*/
+              value={[productName]}
             />
             <S.Title>{"인터뷰 목표"}</S.Title>
             <TextInput
@@ -87,7 +92,8 @@ function QuestionList() {
               width={"100%"}
               height={"52px"}
               backgroundColor={"#F1F4F9"}
-              value={"I.GPT 인터뷰 질문 생성 기능의 부족한 점 파악"}
+              /*value={"I.GPT 인터뷰 질문 생성 기능의 부족한 점 파악"}*/
+              value={goal}
             />
           </S.TitleTextContainer>
         </S.TitleContainer>

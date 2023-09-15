@@ -75,7 +75,9 @@ function BasicInfo() {
       )
       .then(function (response) {
         localStorage.setItem("interview_id", response.data?.interviewId);
-        navigate("/prepare/persona");
+        navigate(
+          `/prepare/persona?productName=${productForm.productName}&goal=${productForm.goal}`
+        );
       })
       .catch(function (error) {});
   };
