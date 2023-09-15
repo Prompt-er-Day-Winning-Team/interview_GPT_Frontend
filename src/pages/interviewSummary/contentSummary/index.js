@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../../components/common/Header";
 import * as S from "./style";
 import Button from "../../../components/common/Button";
 import { message } from "antd";
 import { useNavigate } from "react-router";
+import axios from "axios";
+import { convertGetInterviewResultUrl } from "../../../utils/apis";
 
 const ContentList = [
   {
@@ -50,6 +52,7 @@ const RecordList = [
       "안녕하세요, 김수진 씨. 오늘 인터뷰에 참여해주셔서 감사합니다. 본 인터뷰는 SKT 에디닷의 통화요약 기능에 대한 사용자 경험을 파악하기 위한 것입니다. 솔직한 의견을 자유롭게 나눠주세요.",
   },
 ];
+
 function Modal(props) {
   const { open, close } = props;
 
@@ -97,6 +100,8 @@ function Modal(props) {
 function ContentSummary() {
   const [isOpen, setIsOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [interviewResult, setInterviewResult] = useState([]);
+
   const navigate = useNavigate();
   const success = () => {
     messageApi.open({
@@ -104,6 +109,25 @@ function ContentSummary() {
       content: "링크 복사 완료",
     });
   };
+
+  useEffect(() => {
+    var userId = localStorage.getItem("user_id");
+    var interviewId = localStorage.getItem("interview_id");
+
+    const response = axios
+      .get(convertGetInterviewResultUrl(userId, interviewId), {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        setInterviewResult(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <S.Wrap>
@@ -114,21 +138,27 @@ function ContentSummary() {
         <S.AddButton>{"+ 새 인터뷰어 추가"}</S.AddButton>
       </S.InterviewHeader>
       <S.InterviewerCardBlock>
-        <S.InterviewerCard
-          onClick={() => {
-            setIsOpen(true);
-          }}
-        >
-          <span>{"인터뷰어 1"}</span>
-          <span style={{ color: "#8E94A1" }}>{"Done"}</span>
-        </S.InterviewerCard>
-        <S.InterviewerCard>
-          <span>{"인터뷰어 2"}</span>
-          {contextHolder}
-          <S.LinkCopyButton onClick={success}>
-            {"참여자 전용 링크 복사"}
-          </S.LinkCopyButton>
-        </S.InterviewerCard>
+        {interviewResult &&
+          interviewResult.map((interview) =>
+            interview.interview_url === "done" ? (
+              <S.InterviewerCard
+                onClick={() => {
+                  setIsOpen(true);
+                }}
+              >
+                <span>{"인터뷰어 1"}</span>
+                <span style={{ color: "#8E94A1" }}>{"Done"}</span>
+              </S.InterviewerCard>
+            ) : (
+              <S.InterviewerCard>
+                <span>{interview.name}</span>
+                {contextHolder}
+                <S.LinkCopyButton onClick={success}>
+                  {"참여자 전용 링크 복사"}
+                </S.LinkCopyButton>
+              </S.InterviewerCard>
+            )
+          )}
       </S.InterviewerCardBlock>
       <S.ButtonBlock style={{ marginRight: "30px" }}>
         <Button
