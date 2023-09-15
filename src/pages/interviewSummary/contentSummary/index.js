@@ -5,7 +5,10 @@ import Button from "../../../components/common/Button";
 import { message } from "antd";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { convertGetInterviewResultUrl } from "../../../utils/apis";
+import {
+  convertGetInterviewResultUrl,
+  convertCreateInterviewResultUrl,
+} from "../../../utils/apis";
 
 const ContentList = [
   {
@@ -119,6 +122,23 @@ function ContentSummary() {
     });
   };
 
+  const addNewInterviewer = () => {
+    var userId = localStorage.getItem("user_id");
+    var interviewId = localStorage.getItem("interview_id");
+
+    const response = axios
+      .post(convertCreateInterviewResultUrl(userId, interviewId), {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        setInterviewResult([...interviewResult, response.data]);
+      })
+      .catch(function (error) {});
+  };
+
   useEffect(() => {
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
@@ -133,9 +153,7 @@ function ContentSummary() {
       .then(function (response) {
         setInterviewResult(response.data);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   }, []);
 
   return (
@@ -144,7 +162,9 @@ function ContentSummary() {
       <S.InterviewHeader>
         <S.Title>{"Interviewer"}</S.Title>
         {/*<S.CheckButton>{"개요 확인하기"}</S.CheckButton>*/}
-        <S.AddButton>{"+ 새 인터뷰어 추가"}</S.AddButton>
+        <S.AddButton onClick={addNewInterviewer}>
+          {"+ 새 인터뷰어 추가"}
+        </S.AddButton>
       </S.InterviewHeader>
       <S.InterviewerCardBlock>
         {interviewResult &&
