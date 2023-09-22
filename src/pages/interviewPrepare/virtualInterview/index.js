@@ -73,21 +73,25 @@ function VirtualInterview() {
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
 
-    const response = axios
-      .post(
-        convertCreateVirtualInterviewUrl(userId, interviewId),
-        {},
-        {
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(function (response) {
-        navigate("/summary/content-summary");
-      })
-      .catch(function (error) {});
+    const retryApiCall = () => {
+      axios
+        .post(
+          convertCreateVirtualInterviewUrl(userId, interviewId),
+          {},
+          {
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(function (response) {
+          if (response.data?.virtualInterview === "Waiting") retryApiCall();
+          else navigate("/summary/content-summary");
+        })
+        .catch(function (error) {});
+    };
+    retryApiCall();
   };
 
   return (
@@ -138,8 +142,8 @@ function VirtualInterview() {
             height={"44px"}
             backgroundColor={"#333335"}
             color={"#F1F4F9"}
-            /*{onClick={handleNextButton}}*/
-            onClick={() => navigate("/summary/content-summary")}
+            onClick={handleNextButton}
+            /*onClick={() => navigate("/summary/content-summary")}*/
           />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>

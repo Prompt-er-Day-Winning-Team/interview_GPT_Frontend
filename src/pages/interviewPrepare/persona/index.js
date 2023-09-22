@@ -49,23 +49,28 @@ function Persona() {
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
 
-    const response = axios
-      .post(
-        convertCreatePersonaUrl(userId, interviewId),
-        {},
-        {
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(function (response) {
-        navigate(
-          `/prepare/question-list?productName=${productName}&goal=${goal}`
-        );
-      })
-      .catch(function (error) {});
+    const retryApiCall = () => {
+      axios
+        .post(
+          convertCreatePersonaUrl(userId, interviewId),
+          {},
+          {
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(function (response) {
+          if (response.data?.persona === "Waiting") retryApiCall();
+          else
+            navigate(
+              `/prepare/question-list?productName=${productName}&goal=${goal}`
+            );
+        })
+        .catch(function (error) {});
+    };
+    retryApiCall();
   };
 
   return (

@@ -47,21 +47,25 @@ function QuestionList() {
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
 
-    const response = axios
-      .post(
-        convertCreateQuestionListUrl(userId, interviewId),
-        {},
-        {
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(function (response) {
-        navigate("/prepare/virtual-interview");
-      })
-      .catch(function (error) {});
+    const retryApiCall = () => {
+      axios
+        .post(
+          convertCreateQuestionListUrl(userId, interviewId),
+          {},
+          {
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(function (response) {
+          if (response.data?.questionList === "Waiting") retryApiCall();
+          else navigate("/prepare/virtual-interview");
+        })
+        .catch(function (error) {});
+    };
+    retryApiCall();
   };
 
   return (

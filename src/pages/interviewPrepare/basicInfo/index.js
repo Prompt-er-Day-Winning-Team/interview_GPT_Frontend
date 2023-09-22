@@ -55,14 +55,6 @@ function BasicInfo() {
 
   const handleNextButton = () => {
     var userId = localStorage.getItem("user_id");
-    console.log(userId);
-    console.log(
-      productForm.goal,
-      productForm.productDetail,
-      productForm.productName,
-      selectedStatus,
-      productForm.targetUser
-    );
 
     const response = axios
       .post(
