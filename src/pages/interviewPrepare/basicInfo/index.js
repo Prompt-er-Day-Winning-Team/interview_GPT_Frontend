@@ -55,6 +55,14 @@ function BasicInfo() {
 
   const handleNextButton = () => {
     var userId = localStorage.getItem("user_id");
+    console.log(userId);
+    console.log(
+      productForm.goal,
+      productForm.productDetail,
+      productForm.productName,
+      selectedStatus,
+      productForm.targetUser
+    );
 
     const response = axios
       .post(
@@ -89,8 +97,8 @@ function BasicInfo() {
         <S.CardContainer>
           {statusList.map((status, idx) => (
             <S.Card
-              selected={selectedStatus === idx}
-              onClick={() => setSelectedStatus(idx)}
+              selected={selectedStatus === idx + 1}
+              onClick={() => setSelectedStatus(idx + 1)}
             >
               {status[0]}
               <S.CardTitle>{status[1]}</S.CardTitle>

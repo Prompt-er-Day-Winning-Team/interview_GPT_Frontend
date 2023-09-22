@@ -42,7 +42,7 @@ function QuestionList() {
   const params = new URLSearchParams(location.search);
   const productName = params.get("productName");
   const goal = params.get("goal");
-  console.log(productName, goal);
+
   const handleNextButton = () => {
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
@@ -139,8 +139,8 @@ function QuestionList() {
             height={"44px"}
             backgroundColor={"#333335"}
             color={"#F1F4F9"}
-            /*{onClick={handleNextButton}}*/
-            onClick={() => navigate("/prepare/virtual-interview")}
+            onClick={handleNextButton}
+            /*onClick={() => navigate("/prepare/virtual-interview")}*/
           />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>
