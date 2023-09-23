@@ -70,7 +70,7 @@ function Persona() {
                           type={"text"}
                           frontText={subtitle}
                           value={personaData[title][subtitle]}
-                          width={"80%"}
+                          width={"93%"}
                           height={"52px"}
                           backgroundColor={"#F1F4F9"}
                         />

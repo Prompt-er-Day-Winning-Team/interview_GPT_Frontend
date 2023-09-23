@@ -152,7 +152,8 @@ function ContentSummary() {
         <S.InterviewerCardBlock style={{ alignItems: "center" }}>
           <S.SpinStyle size="large" />
           <S.LoadingText>
-            결과 생성에는 최대 1분 정도 소요될 수 있습니다.
+            입력하신 내용을 바탕으로 인터뷰를 생성중입니다. <br />
+            잠시만 기다려주세요.
           </S.LoadingText>
         </S.InterviewerCardBlock>
       ) : (

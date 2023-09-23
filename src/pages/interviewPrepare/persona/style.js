@@ -41,7 +41,11 @@ export const Title = styled.div`
 
 export const PersonaDefaultInfoContainer = styled.div`
   display: flex;
-  gap: 8px;
+  width: fit-content;
+  font-family: "Pretendard";
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
 `;
 
 export const TitleTextContainer = styled.div`

@@ -63,10 +63,12 @@ export const FinishedInterviewBlock = styled.div`
 
 export const FinishedCard = styled.div`
   width: 305px;
-  height: 347px;
+  height: 337px;
   background: #f1f4f9;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 24px;
   padding: 24px;
 `;

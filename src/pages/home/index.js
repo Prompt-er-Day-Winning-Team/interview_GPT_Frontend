@@ -2,25 +2,7 @@ import React from "react";
 import Header from "../../components/common/Header";
 import * as S from "./style";
 import { useNavigate } from "react-router";
-
-const CardList = [
-  {
-    title: "SKT 에이닷 통화 요약 기능 \n 방해요소",
-    text: "사용자가 SKT 에이닷의 통화 요약 기능을 사용할 때 방해가 되는 요소가 무엇인지 알아본다",
-  },
-  {
-    title: "SKT 에이닷 통화 요약 기능 \n 방해요소",
-    text: "사용자가 SKT 에이닷의 통화 요약 기능을 사용할 때 방해가 되는 요소가 무엇인지 알아본다",
-  },
-  {
-    title: "SKT 에이닷 통화 요약 기능 \n 방해요소",
-    text: "사용자가 SKT 에이닷의 통화 요약 기능을 사용할 때 방해가 되는 요소가 무엇인지 알아본다",
-  },
-  {
-    title: "SKT 에이닷 통화 요약 기능 \n 방해요소",
-    text: "사용자가 SKT 에이닷의 통화 요약 기능을 사용할 때 방해가 되는 요소가 무엇인지 알아본다",
-  },
-];
+import { Empty } from "antd";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -63,19 +45,28 @@ function HomePage() {
   </S.InterviewCard>*/}
         </S.InterviewCardBlock>
       </S.InterviewQuestionBlock>
+
       <S.FinishedInterviewBlock>
         <S.Title>{"finished interview"}</S.Title>
         <S.FinishedCardBlock>
-          {CardList.map((card) => (
-            <S.FinishedCard>
-              <S.InterviewIcon
-                src={process.env.PUBLIC_URL + "/images/Home/interview.svg"}
-              />
-              <S.Title style={{ fontSize: "20px" }}>{card.title}</S.Title>
-              <S.CardText style={{ fontSize: "15px" }}>{card.text}</S.CardText>
-              <S.DoneButton>{"Done"}</S.DoneButton>
-            </S.FinishedCard>
-          ))}
+          <S.FinishedCard>
+            <Empty
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="종료된 인터뷰가 없습니다."
+            />
+          </S.FinishedCard>
+          {/*
+          <S.FinishedCard>
+            <S.InterviewIcon
+              src={process.env.PUBLIC_URL + "/images/Home/interview.svg"}
+            />
+            <S.Title style={{ fontSize: "20px" }}>{card.title}</S.Title>
+            <S.CardText style={{ fontSize: "17px", marginTop: "90px" }}>
+              {"완료된 인터뷰가 없습니다"}
+            </S.CardText>
+            <S.DoneButton>{"Done"}</S.DoneButton>
+          </S.FinishedCard>
+*/}
         </S.FinishedCardBlock>
       </S.FinishedInterviewBlock>
     </S.Wrap>
