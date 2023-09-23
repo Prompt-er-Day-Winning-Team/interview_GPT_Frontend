@@ -37,12 +37,8 @@ function InterviewHelper() {
   const readingQuestion = (text) => speak({ text });
 
   const getQuestion = (audio) => {
-    // audio: blob 파일
-    console.log(audio);
     const fd = new FormData();
-    fd.append("audio", audio);
-    console.log(fd.getAll("audio"));
-    console.log(fd);
+    fd.append("answer_audio_file", audio);
 
     const response = axios
       .post(
@@ -51,7 +47,7 @@ function InterviewHelper() {
           interview_id,
           interview_result_id
         ),
-        audio,
+        fd,
         {
           headers: {
             accept: "application/json",
@@ -60,7 +56,6 @@ function InterviewHelper() {
         }
       )
       .then(function (response) {
-        console.log(response.data);
         if (response.data?.isFinished) {
           setIsFinished(true);
           setTextToSpeak("인터뷰가 종료되었습니다. 참여해주셔서 감사합니다");
@@ -94,6 +89,7 @@ function InterviewHelper() {
   return (
     <S.Wrap>
       <S.Title>{textToSpeak}</S.Title>
+
       <img
         src={process.env.PUBLIC_URL + "/images/Record/logo.gif"}
         alt="gif"
