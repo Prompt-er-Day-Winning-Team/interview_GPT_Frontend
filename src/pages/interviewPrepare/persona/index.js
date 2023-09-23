@@ -11,14 +11,11 @@ function Persona() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const productName = params.get("productName");
-  const goal = params.get("goal");
-
+  const interviewId = params.get("interview_id");
   const [personaData, setPersonaData] = useState();
 
   useEffect(() => {
     var userId = localStorage.getItem("user_id");
-    var interviewId = localStorage.getItem("interview_id");
 
     const retryApiCall = () => {
       axios
@@ -104,11 +101,8 @@ function Persona() {
             backgroundColor={"#333335"}
             color={"#F1F4F9"}
             onClick={() =>
-              navigate(
-                `/prepare/question-list?productName=${productName}&goal=${goal}`
-              )
+              navigate(`/prepare/question-list?interview_id=${interviewId}`)
             }
-            /*onClick={() => navigate("/prepare/question-list")}*/
           />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>

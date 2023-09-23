@@ -3,17 +3,19 @@ import Header from "../../../components/common/Header";
 import * as S from "./style";
 import { VirtualInterviewInput } from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { convertCreateVirtualInterviewUrl } from "../../../utils/apis";
 
 function VirtualInterview() {
   const navigate = useNavigate();
   const [virtualInterview, setVirtualInterview] = useState();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const interviewId = params.get("interview_id");
 
   useEffect(() => {
     var userId = localStorage.getItem("user_id");
-    var interviewId = localStorage.getItem("interview_id");
 
     const retryApiCall = () => {
       axios
@@ -78,7 +80,9 @@ function VirtualInterview() {
             height={"44px"}
             backgroundColor={"#FFFFFF"}
             color={"#333335"}
-            onClick={() => navigate("/prepare/question-list")}
+            onClick={() =>
+              navigate(`/prepare/question-list?interview_id=${interviewId}`)
+            }
           />
           <Button
             text={"다음으로"}
@@ -86,7 +90,9 @@ function VirtualInterview() {
             height={"44px"}
             backgroundColor={"#333335"}
             color={"#F1F4F9"}
-            onClick={() => navigate("/summary/content-summary")}
+            onClick={() =>
+              navigate(`/summary/content-summary?interview_id=${interviewId}`)
+            }
           />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>

@@ -3,7 +3,7 @@ import Header from "../../../components/common/Header";
 import * as S from "./style";
 import Button from "../../../components/common/Button";
 import { message } from "antd";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import axios from "axios";
 import {
   convertGetInterviewResultUrl,
@@ -106,6 +106,10 @@ function ContentSummary() {
   const [interviewResult, setInterviewResult] = useState([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const interviewId = params.get("interview_id");
+
   const handleCopyButton = (link, resultId) => {
     localStorage.setItem("result_id", resultId);
 
@@ -126,7 +130,6 @@ function ContentSummary() {
 
   const addNewInterviewer = () => {
     var userId = localStorage.getItem("user_id");
-    var interviewId = localStorage.getItem("interview_id");
 
     const response = axios
       .post(convertCreateInterviewResultUrl(userId, interviewId), {
@@ -143,7 +146,6 @@ function ContentSummary() {
 
   useEffect(() => {
     var userId = localStorage.getItem("user_id");
-    var interviewId = localStorage.getItem("interview_id");
 
     const response = axios
       .get(convertGetInterviewResultUrl(userId, interviewId), {

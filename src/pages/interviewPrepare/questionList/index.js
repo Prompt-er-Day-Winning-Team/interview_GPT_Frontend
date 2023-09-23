@@ -18,13 +18,15 @@ function QuestionList() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const productName = params.get("productName");
-  const goal = params.get("goal");
+  const interviewId = params.get("interview_id");
   const [questionList, setQuestionList] = useState();
+  const [productInfo, setProductInfo] = useState({
+    productName: "",
+    goal: "",
+  });
 
   useEffect(() => {
     var userId = localStorage.getItem("user_id");
-    var interviewId = localStorage.getItem("interview_id");
 
     const retryApiCall = () => {
       axios
@@ -45,7 +47,11 @@ function QuestionList() {
             }, 2000);
           } else {
             setQuestionList(response.data.questionList);
-            console.log(response.data.questionList);
+            setProductInfo({
+              ...productInfo,
+              productName: response.data.productName,
+              goal: response.data.interviewGoal,
+            });
           }
         })
         .catch(function (error) {});
@@ -71,7 +77,7 @@ function QuestionList() {
               width={"100%"}
               height={"52px"}
               backgroundColor={"#F1F4F9"}
-              value={[productName]}
+              value={productInfo.productName}
             />
             <S.Title>{"인터뷰 목표"}</S.Title>
             <TextInput
@@ -80,7 +86,7 @@ function QuestionList() {
               width={"100%"}
               height={"52px"}
               backgroundColor={"#F1F4F9"}
-              value={goal}
+              value={productInfo.goal}
             />
           </S.TitleTextContainer>
         </S.TitleContainer>
@@ -119,7 +125,9 @@ function QuestionList() {
             height={"44px"}
             backgroundColor={"#FFFFFF"}
             color={"#333335"}
-            onClick={() => navigate("/prepare/persona")}
+            onClick={() =>
+              navigate(`/prepare/persona?interview_id=${interviewId}`)
+            }
           />
           <Button
             text={"다음으로"}
@@ -127,7 +135,9 @@ function QuestionList() {
             height={"44px"}
             backgroundColor={"#333335"}
             color={"#F1F4F9"}
-            onClick={() => navigate("/prepare/virtual-interview")}
+            onClick={() =>
+              navigate(`/prepare/virtual-interview?interview_id=${interviewId}`)
+            }
           />
         </S.ButtonContainer>
       </S.InterviewQuestionBlock>

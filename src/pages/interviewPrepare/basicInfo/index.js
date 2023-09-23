@@ -74,10 +74,7 @@ function BasicInfo() {
         }
       )
       .then(function (response) {
-        localStorage.setItem("interview_id", response.data?.interviewId);
-        navigate(
-          `/prepare/persona?productName=${productForm.productName}&goal=${productForm.goal}`
-        );
+        navigate(`/prepare/persona?interview_id=${response.data?.interviewId}`);
       })
       .catch(function (error) {});
   };
