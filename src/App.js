@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import LoginPage from "./pages/login";
 import JoinPage from "./pages/join";
 import HomePage from "./pages/home";
@@ -29,7 +29,11 @@ function App() {
           element={<VirtualInterview />}
         />
         {/* 실시간 인터뷰 도우미 */}
-        <Route path="/helper" element={<InterviewHelper />} />
+        <Route
+          path="/interview-helper/users/:user_id/interviews/:interview_id/interview-results/:interview_result_id"
+          element={<InterviewHelper />}
+        />
+
         {/* 인터뷰 내용 정리 및 인사이트 도출 */}
         <Route path="/summary/content-summary" element={<ContentSummary />} />
         <Route path="/summary/total-stats" element={<TotalStats />} />
