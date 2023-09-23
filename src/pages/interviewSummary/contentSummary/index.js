@@ -156,7 +156,7 @@ function ContentSummary() {
         setInterviewResult(response.data);
       })
       .catch(function (error) {});
-  }, []);
+  }, [interviewResult.length]);
 
   return (
     <S.Wrap>
