@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import { convertCreateInterviewContentsUrl } from "../../utils/apis";
 import axios from "axios";
@@ -11,10 +11,54 @@ function InterviewHelper() {
   const [textToSpeak, setTextToSpeak] = useState("");
   const { speak } = useSpeechSynthesis();
 
+  const [mediaRecorder, setMediaRecorder] = useState(null);
+  const [audioChunks, setAudioChunks] = useState([]);
+
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+
+      recorder.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          setAudioChunks([e.data]);
+        }
+      };
+
+      setMediaRecorder(recorder);
+      recorder.start();
+    } catch (error) {
+      console.error("녹음을 시작할 수 없습니다:", error);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+      const formData = new FormData();
+      console.log("audioChunks", audioChunks);
+      audioChunks.forEach((chunk, index) => {
+        formData.append(
+          `audioChunk${index}`,
+          chunk,
+          `audio_chunk_${index}.webm`
+        );
+      });
+
+      getQuestion(formData);
+    }
+  };
+
   const readingQuestion = (text) => speak({ text });
 
-  const getQuestion = () => {
-    console.log("getQuestion");
+  const getQuestion = (audio) => {
+    /*audio.forEach((value, key) => {
+      if (value instanceof Blob) {
+        console.log(`Field Name: ${key}`);
+        console.log(`Value Size: ${value.size} bytes`);
+      }
+    });*/
+
     var userId = localStorage.getItem("user_id");
     var interviewId = localStorage.getItem("interview_id");
     var result_id = localStorage.getItem("result_id");
@@ -22,12 +66,13 @@ function InterviewHelper() {
     const response = axios
       .post(
         convertCreateInterviewContentsUrl(userId, interviewId, result_id),
-        // 녹음본 담아서 전달
-        {},
+        {
+          audio,
+        },
         {
           headers: {
             accept: "application/json",
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       )
@@ -48,15 +93,16 @@ function InterviewHelper() {
   const handleButtonClick = (type) => {
     switch (type) {
       case "start":
-        getQuestion();
+        getQuestion("");
         setIsStart(false);
         break;
       case "record":
         setIsRecord(!isRecord);
+        startRecording();
         break;
       case "stop":
-        getQuestion();
         setIsRecord(!isRecord);
+        stopRecording();
         break;
       default:
     }
