@@ -184,17 +184,34 @@ function ContentSummary() {
       ) : (
         <S.InterviewerCardBlock style={{ alignItems: "center" }}>
           {interviewResult &&
-            interviewResult.map((interview) => (
-              <S.InterviewerCard
-                key={interview.interview_result_id}
-                onClick={() => {
-                  setIsOpen(true);
-                }}
-              >
-                <span>{"인터뷰어 1"}</span>
-                <span style={{ color: "#8E94A1" }}>{"Done"}</span>
-              </S.InterviewerCard>
-            ))}
+            interviewResult.map((interview) =>
+              interview.interview_url === "done" ? (
+                <S.InterviewerCard
+                  key={interview.interview_result_id}
+                  onClick={() => {
+                    setIsOpen(true);
+                  }}
+                >
+                  <span>{"인터뷰어 1"}</span>
+                  <span style={{ color: "#8E94A1" }}>{"Done"}</span>
+                </S.InterviewerCard>
+              ) : (
+                <S.InterviewerCard>
+                  <span>{interview.name}</span>
+                  {contextHolder}
+                  <S.LinkCopyButton
+                    onClick={() =>
+                      handleCopyButton(
+                        interview.interview_url,
+                        interview.interview_result_id
+                      )
+                    }
+                  >
+                    {"참여자 전용 링크 복사"}
+                  </S.LinkCopyButton>
+                </S.InterviewerCard>
+              )
+            )}
         </S.InterviewerCardBlock>
       )}
 

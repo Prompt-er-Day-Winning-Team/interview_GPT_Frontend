@@ -43,6 +43,7 @@ function BasicInfo() {
     goal: "",
     targetUser: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   // productForm onChangeHandler
   const handleInputChange = (e) => {
@@ -55,7 +56,7 @@ function BasicInfo() {
 
   const handleNextButton = () => {
     var userId = localStorage.getItem("user_id");
-
+    setIsLoading(true);
     const response = axios
       .post(
         convertCreateInterviewUrl(userId),
@@ -83,75 +84,86 @@ function BasicInfo() {
   return (
     <S.Wrap>
       <Header />
-      <S.InterviewQuestionBlock>
-        <S.Title>{"제품 개발 단계를 선택해주세요!"}</S.Title>
-        <S.CardContainer>
-          {statusList.map((status, idx) => (
-            <S.Card
-              selected={selectedStatus === idx + 1}
-              onClick={() => setSelectedStatus(idx + 1)}
-            >
-              {status[0]}
-              <S.CardTitle>{status[1]}</S.CardTitle>
-              <S.CardContents>{status[2]}</S.CardContents>
-            </S.Card>
-          ))}
-        </S.CardContainer>
-        <S.Title>{"제품 이름"}</S.Title>
-        <TextInput
-          name={"productName"}
-          type={"text"}
-          width={"100%"}
-          height={"52px"}
-          backgroundColor={"#F1F4F9"}
-          value={productForm.productName}
-          onChange={handleInputChange}
-        />
-        <S.TextCount>{`${productForm.productName.length}/100`}</S.TextCount>
-        <S.Title>{"제품 설명(상세하게 설명해주세요!)"}</S.Title>
-        <TextInput
-          name={"productDetail"}
-          type={"text"}
-          width={"100%"}
-          height={"184px"}
-          backgroundColor={"#F1F4F9"}
-          value={productForm.productDetail}
-          onChange={handleInputChange}
-        />
-        <S.TextCount>{`${productForm.productDetail.length}/1000`}</S.TextCount>
-        <S.Title>{"인터뷰 목표"}</S.Title>
-        <TextInput
-          name={"goal"}
-          type={"text"}
-          width={"100%"}
-          height={"52px"}
-          backgroundColor={"#F1F4F9"}
-          value={productForm.goal}
-          onChange={handleInputChange}
-        />
-        <S.TextCount>{`${productForm.goal.length}/100`}</S.TextCount>
-        <S.Title>{"타겟 사용자"}</S.Title>
-        <TextInput
-          name={"targetUser"}
-          type={"text"}
-          width={"100%"}
-          height={"52px"}
-          backgroundColor={"#F1F4F9"}
-          value={productForm.targetUser}
-          onChange={handleInputChange}
-        />
-        <S.TextCount>{`${productForm.targetUser.length}/100`}</S.TextCount>
-        <S.ButtonContainer>
-          <Button
-            text={"다음으로"}
-            width={"192px"}
-            height={"44px"}
-            backgroundColor={"#333335"}
-            color={"#F1F4F9"}
-            onClick={handleNextButton}
+      {isLoading ? (
+        <S.InterviewQuestionBlock
+          style={{ margin: "0px", alignItems: "center" }}
+        >
+          <S.SpinStyle size="large" />
+          <S.LoadingText>
+            결과 생성에는 최대 1분 정도 소요될 수 있습니다.
+          </S.LoadingText>
+        </S.InterviewQuestionBlock>
+      ) : (
+        <S.InterviewQuestionBlock>
+          <S.Title>{"제품 개발 단계를 선택해주세요!"}</S.Title>
+          <S.CardContainer>
+            {statusList.map((status, idx) => (
+              <S.Card
+                selected={selectedStatus === idx + 1}
+                onClick={() => setSelectedStatus(idx + 1)}
+              >
+                {status[0]}
+                <S.CardTitle>{status[1]}</S.CardTitle>
+                <S.CardContents>{status[2]}</S.CardContents>
+              </S.Card>
+            ))}
+          </S.CardContainer>
+          <S.Title>{"제품 이름"}</S.Title>
+          <TextInput
+            name={"productName"}
+            type={"text"}
+            width={"100%"}
+            height={"52px"}
+            backgroundColor={"#F1F4F9"}
+            value={productForm.productName}
+            onChange={handleInputChange}
           />
-        </S.ButtonContainer>
-      </S.InterviewQuestionBlock>
+          <S.TextCount>{`${productForm.productName.length}/100`}</S.TextCount>
+          <S.Title>{"제품 설명(상세하게 설명해주세요!)"}</S.Title>
+          <TextInput
+            name={"productDetail"}
+            type={"text"}
+            width={"100%"}
+            height={"184px"}
+            backgroundColor={"#F1F4F9"}
+            value={productForm.productDetail}
+            onChange={handleInputChange}
+          />
+          <S.TextCount>{`${productForm.productDetail.length}/1000`}</S.TextCount>
+          <S.Title>{"인터뷰 목표"}</S.Title>
+          <TextInput
+            name={"goal"}
+            type={"text"}
+            width={"100%"}
+            height={"52px"}
+            backgroundColor={"#F1F4F9"}
+            value={productForm.goal}
+            onChange={handleInputChange}
+          />
+          <S.TextCount>{`${productForm.goal.length}/100`}</S.TextCount>
+          <S.Title>{"타겟 사용자"}</S.Title>
+          <TextInput
+            name={"targetUser"}
+            type={"text"}
+            width={"100%"}
+            height={"52px"}
+            backgroundColor={"#F1F4F9"}
+            value={productForm.targetUser}
+            onChange={handleInputChange}
+          />
+          <S.TextCount>{`${productForm.targetUser.length}/100`}</S.TextCount>
+          <S.ButtonContainer>
+            <Button
+              text={"다음으로"}
+              width={"192px"}
+              height={"44px"}
+              backgroundColor={"#333335"}
+              color={"#F1F4F9"}
+              onClick={handleNextButton}
+            />
+          </S.ButtonContainer>
+        </S.InterviewQuestionBlock>
+      )}
     </S.Wrap>
   );
 }

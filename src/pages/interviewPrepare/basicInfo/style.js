@@ -1,4 +1,22 @@
 import styled from "styled-components";
+import { Spin } from "antd";
+
+export const SpinStyle = styled(Spin)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  margin-top: 16%;
+`;
+
+export const LoadingText = styled.div`
+  color: #333335;
+  font-size: 21px;
+  font-family: "Pretendard-Bold";
+  line-height: 28px;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Wrap = styled.div`
   width: 100%;
@@ -31,9 +49,12 @@ export const Card = styled.div`
   flex-direction: column;
   width: 296px;
   border-radius: 24px;
-  border: 1px solid var(--gray3, #B7BCC6);
-  border: ${props => props.selected ? "2px solid var(--gray1, #333335)" : "1px solid var(--gray3, #B7BCC6)"};
-  margin-bottom: ${props => props.selected ? "0" : "2px"};
+  border: 1px solid var(--gray3, #b7bcc6);
+  border: ${(props) =>
+    props.selected
+      ? "2px solid var(--gray1, #333335)"
+      : "1px solid var(--gray3, #B7BCC6)"};
+  margin-bottom: ${(props) => (props.selected ? "0" : "2px")};
   padding: 24px;
   cursor: pointer;
   &:hover {
@@ -51,7 +72,7 @@ export const CardTitle = styled.div`
 `;
 
 export const CardContents = styled.div`
-  color: #8E94A1;
+  color: #8e94a1;
   font-size: 14px;
   font-family: "Pretendard";
   word-break: keep-all;
