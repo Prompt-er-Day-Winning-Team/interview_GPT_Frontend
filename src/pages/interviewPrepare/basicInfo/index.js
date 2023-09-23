@@ -76,7 +76,9 @@ function BasicInfo() {
       .then(function (response) {
         navigate(`/prepare/persona?interview_id=${response.data?.interviewId}`);
       })
-      .catch(function (error) {});
+      .catch(function (error) {
+        alert(error);
+      });
   };
   return (
     <S.Wrap>
