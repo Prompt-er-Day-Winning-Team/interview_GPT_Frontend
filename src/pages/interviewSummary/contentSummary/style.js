@@ -162,3 +162,20 @@ export const Content = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
 `;
+
+export const PersonType = styled.div`
+  color: #8e94a1;
+  width: 80px;
+  font-size: 18px;
+  font-family: "Pretendard-Medium";
+  white-space: pre-line;
+`;
+
+export const SummaryContent = styled.div`
+  color: #333335;
+  font-size: 15px;
+  font-family: "Pretendard-Medium";
+  white-space: pre-line;
+  margin-bottom: 10px;
+  width: 400px;
+`;

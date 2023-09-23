@@ -37,3 +37,11 @@ export const convertCreateInterviewContentsUrl = (
 ) => {
   return `https://i-dot-gpt-81f182021aa0.herokuapp.com/v1/users/${user_id}/progress/interviews/${interview_id}/interview_results/${interview_result_id}`;
 };
+
+export const convertReadInterviewResultUrl = (
+  user_id,
+  interview_id,
+  interview_result_id
+) => {
+  return `https://i-dot-gpt-81f182021aa0.herokuapp.com/v1/users/${user_id}/progress/interviews/${interview_id}/interview_results/${interview_result_id}`;
+};
