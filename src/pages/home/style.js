@@ -16,6 +16,8 @@ export const Title = styled.div`
   font-size: 18px;
   font-family: "Pretendard-Bold";
   white-space: pre-line;
+  min-height: 40px;
+  line-height: 24px;
 `;
 
 export const InterviewCardBlock = styled.div`
@@ -32,6 +34,7 @@ export const InterviewCard = styled.div`
   border-radius: 24px;
   border: 1px solid #b7bcc6;
   padding: 24px;
+  cursor: pointer;
 `;
 
 export const PlusButton = styled.div`
@@ -52,7 +55,7 @@ export const CardText = styled.div`
   color: #8e94a1;
   font-size: 17px;
   font-family: "Pretendard-Medium";
-  margin-top: 25px;
+  margin-top: 18px;
 `;
 
 export const FinishedInterviewBlock = styled.div`
@@ -109,7 +112,7 @@ export const ProgressBlock = styled.div`
   border-bottom-left-radius: 20px; /* 왼쪽 아래 모서리 둥글게 깎음 */
   border-bottom-right-radius: 20px;
   margin: -24px;
-  margin-top: 20px !important;
+  margin-top: 40px !important;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/common/Header";
 import * as S from "./style";
 import { useNavigate } from "react-router";
 import { Empty } from "antd";
+import { convertGetInterviewProcessUrl } from "../../utils/apis";
+import axios from "axios";
 
 function HomePage() {
+  const [progressData, setProgressData] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    var userId = localStorage.getItem("user_id");
+
+    const response = axios
+      .get(convertGetInterviewProcessUrl(userId), {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        setProgressData(response.data);
+      })
+      .catch(function (error) {});
+  }, []);
+
+  const clickInterviewCard = (step, interview_id) => {
+    switch (step) {
+      case 1:
+        navigate(`/prepare/persona?interview_id=${interview_id}`);
+        break;
+      case 2:
+        navigate(`/prepare/question-list?interview_id=${interview_id}`);
+        break;
+      case 3:
+        navigate(`/prepare/virtual-interview?interview_id=${interview_id}`);
+        break;
+      case 4:
+        navigate(`/summary/content-summary?interview_id=${interview_id}`);
+        break;
+      default:
+    }
+  };
   return (
     <S.Wrap>
       <Header />
@@ -19,30 +56,24 @@ function HomePage() {
             <S.Title>{"New Interview"}</S.Title>
             <S.CardText>{"새로운 인터뷰를 추가하세요!"}</S.CardText>
           </S.InterviewCard>
-
-          {/*<S.InterviewCard>
-            <S.Title style={{ marginTop: "130px" }}>
-              {"SKT 에이닷 통화 요약 기능 방해요소"}
-            </S.Title>
-            <S.CardText>{"남은 질문 작성하기 3/5"}</S.CardText>
-            <S.ProgressBlock>
-              <S.ProgressBar>
-                <S.Progress style={{ width: "105px" }} />
-              </S.ProgressBar>
-            </S.ProgressBlock>
-          </S.InterviewCard>
-
-          <S.InterviewCard>
-            <S.Title style={{ marginTop: "130px" }}>
-              {"SKT 에이닷 통화 요약 기능 방해요소"}
-            </S.Title>
-            <S.CardText>{"인터뷰 진행하기 4/5"}</S.CardText>
-            <S.ProgressBlock>
-              <S.ProgressBar>
-                <S.Progress />
-              </S.ProgressBar>
-            </S.ProgressBlock>
-  </S.InterviewCard>*/}
+          {progressData &&
+            progressData.map((interview) => (
+              <S.InterviewCard
+                onClick={() =>
+                  clickInterviewCard(interview.step, interview.interviewId)
+                }
+              >
+                <S.Title style={{ marginTop: "125px" }}>
+                  {interview.interviewGoal}
+                </S.Title>
+                <S.CardText>{`남은 질문 작성하기 ${interview.step}/4`}</S.CardText>
+                <S.ProgressBlock>
+                  <S.ProgressBar>
+                    <S.Progress style={{ width: "105px" }} />
+                  </S.ProgressBar>
+                </S.ProgressBlock>
+              </S.InterviewCard>
+            ))}
         </S.InterviewCardBlock>
       </S.InterviewQuestionBlock>
 

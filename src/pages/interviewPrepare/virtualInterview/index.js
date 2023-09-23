@@ -36,7 +36,6 @@ function VirtualInterview() {
               retryApiCall();
             }, 5000);
           } else {
-            console.log(response.data.virtualInterview);
             setVirtualInterview(response.data.virtualInterview);
             setIsLoading(false);
           }

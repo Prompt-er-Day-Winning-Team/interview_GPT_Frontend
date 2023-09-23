@@ -38,9 +38,7 @@ function JoinPage() {
       .then(function (response) {
         navigate("/login");
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   };
 
   function isValidEmail(input) {

@@ -26,7 +26,6 @@ function Modal(props) {
         },
       })
       .then(function (response) {
-        console.log(response.data);
         setModalData(response.data);
       })
       .catch(function (error) {});
