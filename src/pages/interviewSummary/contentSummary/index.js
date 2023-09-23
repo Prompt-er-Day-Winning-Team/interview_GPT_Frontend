@@ -167,7 +167,7 @@ function ContentSummary() {
                     setResultId(interview.interview_result_id);
                   }}
                 >
-                  <span>{"인터뷰어 1"}</span>
+                  <span>{interview.name}</span>
                   <span style={{ color: "#8E94A1" }}>{"Done"}</span>
                 </S.InterviewerCard>
               ) : (
