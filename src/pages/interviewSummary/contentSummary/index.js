@@ -205,7 +205,9 @@ function ContentSummary() {
           height={"45px"}
           backgroundColor={"#333335"}
           color={"#F1F4F9"}
-          onClick={() => navigate("/summary/total-stats")}
+          onClick={() =>
+            navigate(`/summary/total-stats?interview_id=${interviewId}`)
+          }
         />
       </S.ButtonBlock>
 
