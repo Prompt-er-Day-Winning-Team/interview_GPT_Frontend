@@ -106,7 +106,9 @@ function ContentSummary() {
   const [interviewResult, setInterviewResult] = useState([]);
 
   const navigate = useNavigate();
-  const handleCopyButton = (link) => {
+  const handleCopyButton = (link, resultId) => {
+    localStorage.setItem("result_id", resultId);
+
     const textarea = document.createElement("textarea");
     textarea.value = link;
 
@@ -183,7 +185,12 @@ function ContentSummary() {
                 <span>{interview.name}</span>
                 {contextHolder}
                 <S.LinkCopyButton
-                  onClick={() => handleCopyButton(interview.interview_url)}
+                  onClick={() =>
+                    handleCopyButton(
+                      interview.interview_url,
+                      interview.interview_result_id
+                    )
+                  }
                 >
                   {"참여자 전용 링크 복사"}
                 </S.LinkCopyButton>
