@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as S from "./style";
 import { convertCreateInterviewContentsUrl } from "../../utils/apis";
 import axios from "axios";
 import { useSpeechSynthesis } from "react-speech-kit";
+import { useParams } from "react-router";
 
 function InterviewHelper() {
   const [isStart, setIsStart] = useState(true);
@@ -10,65 +11,47 @@ function InterviewHelper() {
   const [isFinished, setIsFinished] = useState(false);
   const [textToSpeak, setTextToSpeak] = useState("");
   const { speak } = useSpeechSynthesis();
+  const { user_id, interview_id, interview_result_id } = useParams();
 
   const [mediaRecorder, setMediaRecorder] = useState(null);
-  const [audioChunks, setAudioChunks] = useState([]);
 
   const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const recorder = new MediaRecorder(stream);
 
-      recorder.ondataavailable = (e) => {
-        if (e.data.size > 0) {
-          setAudioChunks([e.data]);
-        }
-      };
-
-      setMediaRecorder(recorder);
-      recorder.start();
-    } catch (error) {
-      console.error("녹음을 시작할 수 없습니다:", error);
-    }
+    recorder.ondataavailable = (e) => {
+      if (e.data.size > 0) {
+        getQuestion(e.data);
+      }
+    };
+    setMediaRecorder(recorder);
+    recorder.start();
   };
 
   const stopRecording = () => {
     if (mediaRecorder) {
       mediaRecorder.stop();
-      const formData = new FormData();
-      console.log("audioChunks", audioChunks);
-      audioChunks.forEach((chunk, index) => {
-        formData.append(
-          `audioChunk${index}`,
-          chunk,
-          `audio_chunk_${index}.webm`
-        );
-      });
-
-      getQuestion(formData);
     }
   };
 
   const readingQuestion = (text) => speak({ text });
 
   const getQuestion = (audio) => {
-    /*audio.forEach((value, key) => {
-      if (value instanceof Blob) {
-        console.log(`Field Name: ${key}`);
-        console.log(`Value Size: ${value.size} bytes`);
-      }
-    });*/
-
-    var userId = localStorage.getItem("user_id");
-    var interviewId = localStorage.getItem("interview_id");
-    var result_id = localStorage.getItem("result_id");
+    // audio: blob 파일
+    console.log(audio);
+    const fd = new FormData();
+    fd.append("audio", audio);
+    console.log(fd.getAll("audio"));
+    console.log(fd);
 
     const response = axios
       .post(
-        convertCreateInterviewContentsUrl(userId, interviewId, result_id),
-        {
-          audio,
-        },
+        convertCreateInterviewContentsUrl(
+          user_id,
+          interview_id,
+          interview_result_id
+        ),
+        audio,
         {
           headers: {
             accept: "application/json",
@@ -156,5 +139,4 @@ function InterviewHelper() {
     </S.Wrap>
   );
 }
-
 export default InterviewHelper;
