@@ -104,6 +104,7 @@ function ContentSummary() {
   const [isOpen, setIsOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [interviewResult, setInterviewResult] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -130,7 +131,7 @@ function ContentSummary() {
 
   const addNewInterviewer = () => {
     var userId = localStorage.getItem("user_id");
-
+    setIsLoading(true);
     const response = axios
       .post(convertCreateInterviewResultUrl(userId, interviewId), {
         headers: {
@@ -140,6 +141,7 @@ function ContentSummary() {
       })
       .then(function (response) {
         setInterviewResult([...interviewResult, response.data]);
+        setIsLoading(false);
       })
       .catch(function (error) {});
   };
@@ -156,6 +158,7 @@ function ContentSummary() {
       })
       .then(function (response) {
         setInterviewResult(response.data);
+        setIsLoading(false);
       })
       .catch(function (error) {});
   }, [interviewResult.length]);
@@ -170,11 +173,20 @@ function ContentSummary() {
           {"+ 새 인터뷰어 추가"}
         </S.AddButton>
       </S.InterviewHeader>
-      <S.InterviewerCardBlock>
-        {interviewResult &&
-          interviewResult.map((interview) =>
-            interview.interview_url === "done" ? (
+
+      {isLoading ? (
+        <S.InterviewerCardBlock style={{ alignItems: "center" }}>
+          <S.SpinStyle size="large" />
+          <S.LoadingText>
+            결과 생성에는 최대 1분 정도 소요될 수 있습니다.
+          </S.LoadingText>
+        </S.InterviewerCardBlock>
+      ) : (
+        <S.InterviewerCardBlock style={{ alignItems: "center" }}>
+          {interviewResult &&
+            interviewResult.map((interview) => (
               <S.InterviewerCard
+                key={interview.interview_result_id}
                 onClick={() => {
                   setIsOpen(true);
                 }}
@@ -182,24 +194,10 @@ function ContentSummary() {
                 <span>{"인터뷰어 1"}</span>
                 <span style={{ color: "#8E94A1" }}>{"Done"}</span>
               </S.InterviewerCard>
-            ) : (
-              <S.InterviewerCard>
-                <span>{interview.name}</span>
-                {contextHolder}
-                <S.LinkCopyButton
-                  onClick={() =>
-                    handleCopyButton(
-                      interview.interview_url,
-                      interview.interview_result_id
-                    )
-                  }
-                >
-                  {"참여자 전용 링크 복사"}
-                </S.LinkCopyButton>
-              </S.InterviewerCard>
-            )
-          )}
-      </S.InterviewerCardBlock>
+            ))}
+        </S.InterviewerCardBlock>
+      )}
+
       <S.ButtonBlock style={{ marginRight: "30px" }}>
         <Button
           text={"홈으로 돌아가기"}
@@ -218,14 +216,15 @@ function ContentSummary() {
           onClick={() => navigate("/summary/total-stats")}
         />
       </S.ButtonBlock>
-      {isOpen ? (
+
+      {isOpen && (
         <Modal
           open={isOpen}
           close={() => {
             setIsOpen(false);
           }}
         />
-      ) : null}
+      )}
     </S.Wrap>
   );
 }

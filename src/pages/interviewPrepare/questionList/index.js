@@ -24,6 +24,7 @@ function QuestionList() {
     productName: "",
     goal: "",
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     var userId = localStorage.getItem("user_id");
@@ -44,7 +45,7 @@ function QuestionList() {
           if (response.data?.questionList === "Waiting") {
             setTimeout(() => {
               retryApiCall();
-            }, 2000);
+            }, 5000);
           } else {
             setQuestionList(response.data.questionList);
             setProductInfo({
@@ -52,6 +53,7 @@ function QuestionList() {
               productName: response.data.productName,
               goal: response.data.interviewGoal,
             });
+            setIsLoading(false);
           }
         })
         .catch(function (error) {});
@@ -62,85 +64,98 @@ function QuestionList() {
   return (
     <S.Wrap>
       <Header />
-      <S.InterviewQuestionBlock>
-        <S.TitleContainer>
-          <S.Card>
-            {status[0]}
-            <S.CardTitle>{status[1]}</S.CardTitle>
-            <S.CardContents>{status[2]}</S.CardContents>
-          </S.Card>
-          <S.TitleTextContainer>
-            <S.Title>{"제품 이름"}</S.Title>
-            <TextInput
-              name={"productName"}
-              type={"text"}
-              width={"100%"}
-              height={"52px"}
-              backgroundColor={"#F1F4F9"}
-              value={productInfo.productName}
+      {isLoading ? (
+        <S.InterviewQuestionBlock
+          style={{ margin: "0px", alignItems: "center" }}
+        >
+          <S.SpinStyle size="large" />
+          <S.LoadingText>
+            결과 생성에는 최대 1분 정도 소요될 수 있습니다.
+          </S.LoadingText>
+        </S.InterviewQuestionBlock>
+      ) : (
+        <S.InterviewQuestionBlock>
+          <S.TitleContainer>
+            <S.Card>
+              {status[0]}
+              <S.CardTitle>{status[1]}</S.CardTitle>
+              <S.CardContents>{status[2]}</S.CardContents>
+            </S.Card>
+            <S.TitleTextContainer>
+              <S.Title>{"제품 이름"}</S.Title>
+              <TextInput
+                name={"productName"}
+                type={"text"}
+                width={"100%"}
+                height={"52px"}
+                backgroundColor={"#F1F4F9"}
+                value={productInfo.productName}
+              />
+              <S.Title>{"인터뷰 목표"}</S.Title>
+              <TextInput
+                name={"productName"}
+                type={"text"}
+                width={"100%"}
+                height={"52px"}
+                backgroundColor={"#F1F4F9"}
+                value={productInfo.goal}
+              />
+            </S.TitleTextContainer>
+          </S.TitleContainer>
+          {questionList &&
+            Object.keys(questionList).map((topic) => (
+              <>
+                <S.Title>{topic}</S.Title>
+                {questionList[topic].map((questionSet, idx) => (
+                  <S.QuestionSetContainer>
+                    <QuestionInput
+                      name={"question"}
+                      type={"text"}
+                      frontText={`Q${idx + 1}.`}
+                      value={`${questionSet.question}`}
+                      width={"100%"}
+                      height={"52px"}
+                      backgroundColor={"#F1F4F9"}
+                    />
+                    <QuestionInput
+                      name={"answer"}
+                      type={"text"}
+                      frontText={`A${idx + 1}.`}
+                      value={`${questionSet.answer}`}
+                      width={"100%"}
+                      height={"52px"}
+                      backgroundColor={"#F1F4F9"}
+                    />
+                  </S.QuestionSetContainer>
+                ))}
+              </>
+            ))}
+          <S.ButtonContainer>
+            <Button
+              text={"이전으로"}
+              width={"192px"}
+              height={"44px"}
+              backgroundColor={"#FFFFFF"}
+              color={"#333335"}
+              onClick={() =>
+                navigate(`/prepare/persona?interview_id=${interviewId}`)
+              }
             />
-            <S.Title>{"인터뷰 목표"}</S.Title>
-            <TextInput
-              name={"productName"}
-              type={"text"}
-              width={"100%"}
-              height={"52px"}
-              backgroundColor={"#F1F4F9"}
-              value={productInfo.goal}
+            <Button
+              text={"다음으로"}
+              width={"192px"}
+              height={"44px"}
+              backgroundColor={"#333335"}
+              color={"#F1F4F9"}
+              onClick={() =>
+                navigate(
+                  `/prepare/virtual-interview?interview_id=${interviewId}`
+                )
+              }
             />
-          </S.TitleTextContainer>
-        </S.TitleContainer>
-        {questionList &&
-          Object.keys(questionList).map((topic) => (
-            <>
-              <S.Title>{topic}</S.Title>
-              {questionList[topic].map((questionSet, idx) => (
-                <S.QuestionSetContainer>
-                  <QuestionInput
-                    name={"question"}
-                    type={"text"}
-                    frontText={`Q${idx + 1}.`}
-                    value={`${questionSet.question}`}
-                    width={"100%"}
-                    height={"52px"}
-                    backgroundColor={"#F1F4F9"}
-                  />
-                  <QuestionInput
-                    name={"answer"}
-                    type={"text"}
-                    frontText={`A${idx + 1}.`}
-                    value={`${questionSet.answer}`}
-                    width={"100%"}
-                    height={"52px"}
-                    backgroundColor={"#F1F4F9"}
-                  />
-                </S.QuestionSetContainer>
-              ))}
-            </>
-          ))}
-        <S.ButtonContainer>
-          <Button
-            text={"이전으로"}
-            width={"192px"}
-            height={"44px"}
-            backgroundColor={"#FFFFFF"}
-            color={"#333335"}
-            onClick={() =>
-              navigate(`/prepare/persona?interview_id=${interviewId}`)
-            }
-          />
-          <Button
-            text={"다음으로"}
-            width={"192px"}
-            height={"44px"}
-            backgroundColor={"#333335"}
-            color={"#F1F4F9"}
-            onClick={() =>
-              navigate(`/prepare/virtual-interview?interview_id=${interviewId}`)
-            }
-          />
-        </S.ButtonContainer>
-      </S.InterviewQuestionBlock>
+          </S.ButtonContainer>
+        </S.InterviewQuestionBlock>
+      )}
     </S.Wrap>
   );
 }

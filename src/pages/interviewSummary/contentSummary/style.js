@@ -1,5 +1,21 @@
 import styled from "styled-components";
 import Modal from "antd/es/modal/Modal";
+import { Spin } from "antd";
+
+export const SpinStyle = styled(Spin)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  margin-top: 11%;
+`;
+
+export const LoadingText = styled.div`
+  color: #333335;
+  font-size: 21px;
+  font-family: "Pretendard-Bold";
+  line-height: 28px;
+`;
 
 export const Wrap = styled.div`
   width: 100%;
