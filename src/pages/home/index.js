@@ -69,7 +69,7 @@ function HomePage() {
                 <S.CardText>{`남은 질문 작성하기 ${interview.step}/4`}</S.CardText>
                 <S.ProgressBlock>
                   <S.ProgressBar>
-                    <S.Progress style={{ width: "105px" }} />
+                    <S.Progress style={{ width: `${interview.step * 50}px` }} />
                   </S.ProgressBar>
                 </S.ProgressBlock>
               </S.InterviewCard>
