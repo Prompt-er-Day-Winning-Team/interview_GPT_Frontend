@@ -49,13 +49,13 @@ function HomePage() {
       <S.InterviewQuestionBlock>
         <S.Title>{"Interview"}</S.Title>
         <S.InterviewCardBlock>
-          <S.InterviewCard>
-            <S.PlusButton onClick={() => navigate("/prepare/basic-info")}>
-              {"+"}
-            </S.PlusButton>
+          <S.InterviewCard onClick={() => navigate("/prepare/basic-info")}>
+            <S.PlusButton>{"+"}</S.PlusButton>
             <S.Title>{"New Interview"}</S.Title>
             <S.CardText>{"새로운 인터뷰를 추가하세요!"}</S.CardText>
+            <S.ProgressBlock></S.ProgressBlock>
           </S.InterviewCard>
+
           {progressData &&
             progressData.map((interview) => (
               <S.InterviewCard

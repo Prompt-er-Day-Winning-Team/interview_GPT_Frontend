@@ -24,6 +24,7 @@ export const InterviewCardBlock = styled.div`
   display: flex;
   gap: 16px;
   margin-top: 25px;
+  width: 100vw;
 `;
 
 export const InterviewCard = styled.div`
@@ -43,12 +44,12 @@ export const PlusButton = styled.div`
   cursor: pointer;
   background: #f1f4f9;
   color: #333335;
-  font-size: 35px;
+  font-size: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  margin-bottom: 120px;
+  margin-bottom: 130px;
 `;
 
 export const CardText = styled.div`
